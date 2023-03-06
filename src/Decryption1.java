@@ -9,9 +9,14 @@ public class Decryption1 {
         for(int i = 0;i < code.length();i++)
         {
             int charPosition = alphabet.indexOf(code.charAt(i));
-            int keyVal = (key + charPosition) % 26;
-            char replaceVal = alphabet.charAt(keyVal);
-            DecryptedText.append(replaceVal);
+            if (Character.isAlphabetic(code.charAt(i)))
+            {
+                int keyVal = (key + charPosition) % 26;
+                char replaceVal = alphabet.charAt(keyVal);
+                DecryptedText.append(replaceVal);
+            } else {
+                DecryptedText.append(code.charAt(i));
+            }
         }
         return DecryptedText.toString();
     }

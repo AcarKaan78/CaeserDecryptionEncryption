@@ -7,13 +7,17 @@ public class Encryption {
         code = code.toLowerCase();
         StringBuilder cipherText = new StringBuilder();
         for (int ii = 0; ii < code.length(); ii++) {
-            int charpos = alphabet.indexOf(code.charAt(ii));
-            int keyVal = (charpos - key) % 26;
-            if (keyVal < 0) {
-                keyVal = alphabet.length() + keyVal;
+            if (Character.isAlphabetic(code.charAt(ii))) {
+                int charpos = alphabet.indexOf(code.charAt(ii));
+                int keyVal = (charpos - key) % 26;
+                if (keyVal < 0) {
+                    keyVal = alphabet.length() + keyVal;
+                }
+                char replaceChar = alphabet.charAt(keyVal);
+                cipherText.append(replaceChar);
+            } else {
+                cipherText.append(code.charAt(ii));
             }
-            char replaceChar = alphabet.charAt(keyVal);
-            cipherText.append(replaceChar);
         }
         return cipherText.toString();
     }
